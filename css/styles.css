@@ -10,18 +10,35 @@ html{
 
 .container{
     display: block;
-    margin: 50px auto;
-    width: 800px;
+    margin: 50px auto 35px;
+    width: 720px;
     border: 3px solid blue;
     box-shadow: 0 0 20px aquamarine;
 }
 .grid{
     display: grid;
-    grid-template-rows: repeat(16, 50px);
-    grid-template-columns: repeat(16, 50px);
+    grid-template-rows: repeat(16, 45px);
+    grid-template-columns: repeat(16, 45px);
 
 }
 .item{
     background-color: whitesmoke;
     border: 1px solid rgb(49, 36, 36);
+}
+
+.footer{
+   display: flex;
+   justify-content: center;
+}
+.footer button{
+    color: white;
+    background-color: rgb(0, 0, 187);
+    border: 3px solid aqua;
+    border-radius: 5px;
+    padding: 20px 10px;
+    width: 200px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 20px;   
+
 }

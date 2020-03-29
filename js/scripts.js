@@ -7,3 +7,10 @@ for( ; i < n*n; i++){
     item.classList.add('item');
     grid.appendChild(item);
 }
+
+const items = Array.from(document.querySelectorAll(".item"));
+items.forEach(item => item.addEventListener('mouseover', changeColor));
+
+function changeColor(e){
+    e.target.style.backgroundColor = "red";
+}
