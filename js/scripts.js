@@ -10,8 +10,6 @@ for( ; i < n*n; i++){
     grid.appendChild(item);
 }
 
-
-
 function changeColor(e){
     e.target.style.backgroundColor = "red";
 }
@@ -32,7 +30,7 @@ function resetGrid(){
         item.classList.add('item');
         item.addEventListener('mouseover', changeColor);
         grid.appendChild(item);
-    }
+    }   
     grid.style.cssText = `grid-template-rows: repeat(${n}, ${720/n}px); grid-template-columns: repeat(${n}, ${720/n}px);`;       
 }
 
