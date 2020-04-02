@@ -16,19 +16,19 @@ let colorBtn = document.querySelector("#color");
 let randomBtn = document.querySelector("#random");
 let grayscaleBtn = document.querySelector("#grayscale");
 colorBtn.addEventListener('click', function(e){
-    resetGrid();
+    //resetGrid();
     color = true;
     random = false;
     grayscale = false;
 });
 randomBtn.addEventListener('click', function(e){
-    resetGrid();
+    //resetGrid();
     color = false;
     random = true;
     grayscale = false;
 });
 grayscaleBtn.addEventListener('click', function(e){
-    resetGrid();
+    //resetGrid();
     color = false;
     random = false;
     grayscale = true;
@@ -46,11 +46,12 @@ for( ; i < n*n; i++){
     item.classList.add('item');
     item.addEventListener('mouseover', changeColor);
     item.addEventListener('mousedown', changeColor);
+    item.style.backgroundColor = "rgba(0,0,0,0)";
     grid.appendChild(item);
 }
 
 function changeColor(e){
-    if(isDrawing === true){
+    if(isDrawing === true || e.buttons==1 ){
         if (color === true){
             e.target.style.backgroundColor = "red";
         }
@@ -62,10 +63,23 @@ function changeColor(e){
             e.target.style.backgroundColor = `rgba(${r},${g},${b})`;
         }
         if(grayscale === true){
+            let color = e.target.style.backgroundColor;
+            if(color == "rgb(0, 0, 0)")  /// opacity 0.9 + 0.1 turn rgba(0,0,0,1) to rgb(0,0,0)
+                return;
+            
+            let opacity = parseFloat(color.slice(-3));
+            console.log(opacity);
+            if(opacity > 1 || isNaN(opacity)){
+                opacity = 0;
+            }
+            
+            if(opacity !== 1)
+                opacity += 0.1;
 
+            e.target.style.backgroundColor = `rgba(0,0,0, ${opacity})`;
         }
-    }else if(isErasing === true){
-        e.target.style.backgroundColor = 'whitesmoke';
+    }else if(isErasing === true || e.buttons == 2){
+        e.target.style.backgroundColor = 'rgba(0,0,0,0)';
     }
 
 }
@@ -73,7 +87,7 @@ function changeColor(e){
 function resetGrid(){
     const items = Array.from(document.querySelectorAll(".item"));
     items.forEach(item => {
-        item.style.backgroundColor = "whitesmoke";
+        item.style.backgroundColor = "rgba(0,0,0,0)";
     });
 }
 
@@ -88,11 +102,15 @@ function resizeGrid(){
     for( ; i < n*n; i++){
         const item = document.createElement('div');
         item.classList.add('item');
+        item.style.backgroundColor = "rgba(0,0,0,0)";
         item.addEventListener('mousedown', changeColor);
         item.addEventListener('mouseover', changeColor);
         grid.appendChild(item);
     }   
     grid.style.cssText = `grid-template-rows: repeat(${n}, ${720/n}px); grid-template-columns: repeat(${n}, ${720/n}px);`; 
+    gridEnabled = true;
+    removeGrid.textContent = "Remove grid";
+    
 }
 
 function rmvGrid(){
@@ -126,10 +144,10 @@ grid.addEventListener('contextmenu', function(e){  // iskljucuje se meni za desn
 
 function setDrawing(e){
     e.preventDefault();
-    if(e.button === 0){
+    if(e.buttons === 1){
         isDrawing = true;
         isErasing = false;
-    }else if(e.button === 2){
+    }else if(e.buttons === 2){
         isDrawing = false;
         isErasing = true;
     }

@@ -34,7 +34,7 @@ body{
     display: grid;
     grid-template-rows: repeat(16, 45px);
     grid-template-columns: repeat(16, 45px);
-
+    background-color: whitesmoke;
 }
 .item{
     background-color: whitesmoke;
