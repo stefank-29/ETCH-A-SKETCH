@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
 
   <title>ETCH-A-SKETCH</title>
 
@@ -12,7 +14,18 @@
 
 <body>
   <div id="panel">
-    <button id="color">Color</button>
+    
+    <div class="dropdown">
+      <button id="color" class="dropBtn">Color</button>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="#" id="black" class="pickColor">Black</a>
+        <a href="#" id="blue" class="pickColor">Blue</a>
+        <a href="#" id="red" class="pickColor">Red</a>
+        <a href="#" id="green" class="pickColor">Green</a>
+        <a href="#" id="orange" class="pickColor">Orange</a>
+        <a href="#" id="purple" class="pickColor">Purple</a>
+      </div>
+    </div>
     <button id="random">Random</button>
     <button id="grayscale">Grayscale</button>
     <button id="clear">Clear</button>
@@ -29,5 +42,6 @@
   </div>
 
   <script src="js/script1.js"></script>
+  <script src="js/script2.js"></script>
 </body>
 </html>

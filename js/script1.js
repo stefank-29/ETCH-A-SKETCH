@@ -6,6 +6,7 @@ let grayscale = false;
 let gridEnabled = true;
 let isDrawing = false;
 let isErasing = false;
+let colorPick = "black";
 
 let grid = document.querySelector(".grid");
 let clearBtn = document.querySelector("#clear");
@@ -38,9 +39,6 @@ removeGrid.addEventListener('click', rmvGrid);
 
 
 
-
-
-
 for( ; i < n*n; i++){
     const item = document.createElement('div');
     item.classList.add('item');
@@ -50,10 +48,18 @@ for( ; i < n*n; i++){
     grid.appendChild(item);
 }
 
+
+let colors = document.querySelectorAll(".pickColor");
+colors.forEach(color => color.addEventListener('click', selectColor));
+
+function selectColor(e){
+    colorPick = e.target.getAttribute("id");
+}
+
 function changeColor(e){
     if(isDrawing === true || e.buttons==1 ){
         if (color === true){
-            e.target.style.backgroundColor = "red";
+            e.target.style.backgroundColor = colorPick;
         }
         if(random === true){
             let r = Math.floor(Math.random()*256);
@@ -109,7 +115,7 @@ function resizeGrid(){
     }   
     grid.style.cssText = `grid-template-rows: repeat(${n}, ${720/n}px); grid-template-columns: repeat(${n}, ${720/n}px);`; 
     gridEnabled = true;
-    removeGrid.textContent = "Remove grid";
+    removeGrid.textContent = "Remove grid"; 
     
 }
 
@@ -120,7 +126,7 @@ function rmvGrid(){
         if(gridEnabled === true)
             item.style.border = '0';
         else
-            item.style.border = '1px solid black';
+            item.style.border = '1px solid rgb(49, 36, 36)';
     });
     if(gridEnabled === true){
         removeGrid.textContent = "Enable grid";
