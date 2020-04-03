@@ -33,6 +33,7 @@ grayscaleBtn.addEventListener('click', function(e){
     color = false;
     random = false;
     grayscale = true;
+    title.style.color = "rgb(100,100,100)"
 });
 let removeGrid = document.querySelector("#remove");
 removeGrid.addEventListener('click', rmvGrid);
@@ -54,7 +55,11 @@ colors.forEach(color => color.addEventListener('click', selectColor));
 
 function selectColor(e){
     colorPick = e.target.getAttribute("id");
+    title.style.color = colorPick;
 }
+
+let title = document.querySelector("#title");
+title.style.color = colorPick;
 
 function changeColor(e){
     if(isDrawing === true || e.buttons==1 ){
@@ -67,6 +72,7 @@ function changeColor(e){
             let b = Math.floor(Math.random()*256);
             //e.target.style.cssText = `background-color: rgba(${r},${g},${b});`
             e.target.style.backgroundColor = `rgba(${r},${g},${b})`;
+            title.style.color = `rgba(${r},${g},${b})`;
         }
         if(grayscale === true){
             let color = e.target.style.backgroundColor;
